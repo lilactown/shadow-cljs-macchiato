@@ -1,0 +1,9 @@
+{:lein {:profile "server"}
+
+ :builds {:dev {:target :node-script
+                :main server.app/init
+                :output-to "target/out/server.js"
+                :autoload true
+                ;; :devtools {:before-load-async server.app/stop
+                ;;            :after-load server.app/start}
+                }}}
