@@ -6,10 +6,10 @@
 
 ### running in development mode
 
-run the following command in the terminal to install NPM modules and start Figwheel:
+run the following command in the terminal to install NPM modules and start shadow-cljs:
 
 ```
-lein build
+shadow-cljs watch dev
 ```
 
 run `node` in another terminal:
@@ -18,32 +18,32 @@ run `node` in another terminal:
 npm start
 ```
 
-#### configuring the REPL
+<!-- #### configuring the REPL -->
 
-Once Figwheel and node are running, you can connect to the remote REPL at `localhost:7000`.
+<!-- Once Figwheel and node are running, you can connect to the remote REPL at `localhost:7000`. -->
 
-Type `(cljs)` in the REPL to connect to Figwheel ClojureScript REPL.
+<!-- Type `(cljs)` in the REPL to connect to Figwheel ClojureScript REPL. -->
 
 
-### building the release version
+<!-- ### building the release version -->
 
-```
-lein package
-```
+<!-- ``` -->
+<!-- lein package -->
+<!-- ``` -->
 
-Run the release version:
+<!-- Run the release version: -->
 
-```
-npm start
-```
+<!-- ``` -->
+<!-- npm start -->
+<!-- ``` -->
 
-### Running using Docker
+<!-- ### Running using Docker -->
 
-The template comes with a `Dockerfile` for running the application using Docker
+<!-- The template comes with a `Dockerfile` for running the application using Docker -->
 
-Once you've run `lein package`, you can build and run a Docker container as follows:
+<!-- Once you've run `lein package`, you can build and run a Docker container as follows: -->
 
-```
-docker build -t server:latest .
-docker run -p 3000:3000 server:latest
-```
+<!-- ``` -->
+<!-- docker build -t server:latest . -->
+<!-- docker run -p 3000:3000 server:latest -->
+<!-- ``` -->
