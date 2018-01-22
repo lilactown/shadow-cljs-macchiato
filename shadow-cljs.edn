@@ -1,9 +1,11 @@
 {:lein {:profile "server"}
-
- :builds {:dev {:target :node-script
-                :main server.app/init
-                :output-to "target/out/server.js"
-                :devtools {:autoload true}
-                ;; :devtools {:before-load-async server.app/stop
-                ;;            :after-load server.app/start}
-                }}}
+ :nrepl {:port 7000}
+ :builds {:server {:target :node-script
+                   :main server.app/init
+                   :output-to "target/out/server.js"
+                   :devtools {:autoload true}}
+          :client {:target :browser
+                    :modules {:main {:entries [client.core]
+                                     :output-dir "public/app/js"
+                                     :asset-path "/app/js"}}
+                   :devtools {:autoload true}}}}

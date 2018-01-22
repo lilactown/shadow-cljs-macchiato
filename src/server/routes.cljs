@@ -2,21 +2,21 @@
   (:require
     [bidi.bidi :as bidi]
     [hiccups.runtime]
-    [macchiato.util.response :as r])
+    [macchiato.util.response :as r]
+    [reagent.dom.server :as rg])
   (:require-macros
-    [hiccups.core :refer [html]]))
+   [hiccups.core :refer [html]]))
+
+(defn home-page []
+  [:html
+   [:head]
+   [:body
+    [:h2 "Hallo reagent!"]
+    [:div#app]
+    [:script {:src "js/main.js"}]]])
 
 (defn home [req res raise]
-  (-> (html
-        [:html
-         [:head
-          [:link {:rel "stylesheet" :href "/css/site.css"}]
-          ]
-         [:body
-          [:h2 "Hello World!"]
-          [:p
-           "Your user-agent is: "
-           (str (get-in req [:headers "user-agent"]))]]])
+  (-> (rg/render-to-static-markup [home-page])
       (r/ok)
       (r/content-type "text/html")
       (res)))

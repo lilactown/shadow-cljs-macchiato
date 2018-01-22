@@ -12,7 +12,12 @@
                  [org.clojure/clojurescript "1.9.946"]
                  ;; needed for JDK 9 compatibility
                  [javax.xml.bind/jaxb-api "2.3.0"]
-                 [thheller/shadow-cljs "2.0.138"]]
+                 [thheller/shadow-cljs "2.0.138"]
+                 [reagent "0.8.0-alpha2" :exclusions [[cljsjs/react]
+                                                      [cljsjs/react-dom]
+                                                      [cljsjs/react-dom-server]
+                                                      [cljsjs/create-react-class]]]
+                 [cider/cider-nrepl "0.16.0-snapshot"]]
   :min-lein-version "2.0.0"
   :jvm-opts ^:replace ["-Xmx1g" "-server"]
   :plugins [[lein-doo "0.1.7"]
@@ -22,7 +27,10 @@
             ]
   :npm {:dependencies [[source-map-support "0.4.6"]
                        [shadow-cljs "2.0.138"]
-                       [xregexp "4.0.0"]]
+                       [xregexp "4.0.0"]
+                       [react "15.6.2"]
+                       [react-dom "15.6.2"]
+                       [create-react-class "15.6.2"]]
         :write-package-json true}
   :source-paths ["src"]
   :target-path "target"
@@ -32,8 +40,8 @@
    [:server
     {:npm {:package {:main "target/out/server.js"
                      :scripts {:start "node target/out/server.js"}}}
-     :dependencies [;; [figwheel-sidecar "0.5.14"]
-                    ]
+     ;; :dependencies [[figwheel-sidecar "0.5.14"]
+     ;;                ]
      ;; :cljsbuild
      ;; {:builds {:dev
      ;;           {:source-paths ["env/dev" "src/server"]
@@ -52,32 +60,33 @@
      ;;  :reload-clj-files {:clj true :cljc true}
      ;;  :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
      :repl-options {:init-ns user}}]
-   :test
-   {:cljsbuild
-    {:builds
-     {:test
-      {:source-paths ["env/test" "src/server" "test"]
-       :compiler     {:main server.app
-                      :output-to     "target/test/server.js"
-                      :target        :nodejs
-                      :optimizations :none
-                      :pretty-print  true
-                      :source-map    true}}}}
-    :doo {:build "test"}}
-   :release
-   {:npm {:package {:main "target/release/server.js"
-                    :scripts {:start "node target/release/server.js"}}}
-    :cljsbuild
-    {:builds
-     {:release
-      {:source-paths ["env/prod" "src/server"]
-       :compiler     {:main          server.app
-                      :output-to     "target/release/server.js"
-                      :language-in   :ecmascript5
-                      :target        :nodejs
-                      :optimizations :simple
-                      :pretty-print  false}}
-      }}}}
+   ;; :test
+   ;; {:cljsbuild
+   ;;  {:builds
+   ;;   {:test
+   ;;    {:source-paths ["env/test" "src/server" "test"]
+   ;;     :compiler     {:main server.app
+   ;;                    :output-to     "target/test/server.js"
+   ;;                    :target        :nodejs
+   ;;                    :optimizations :none
+   ;;                    :pretty-print  true
+   ;;                    :source-map    true}}}}
+   ;;  :doo {:build "test"}}
+   ;; :release
+   ;; {:npm {:package {:main "target/release/server.js"
+   ;;                  :scripts {:start "node target/release/server.js"}}}
+   ;;  :cljsbuild
+   ;;  {:builds
+   ;;   {:release
+   ;;    {:source-paths ["env/prod" "src/server"]
+   ;;     :compiler     {:main          server.app
+   ;;                    :output-to     "target/release/server.js"
+   ;;                    :language-in   :ecmascript5
+   ;;                    :target        :nodejs
+   ;;                    :optimizations :simple
+   ;;                    :pretty-print  false}}
+   ;;    }}}
+   }
   :aliases
   {"build" ["do"
             ["clean"]
